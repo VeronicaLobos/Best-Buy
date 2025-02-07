@@ -1,19 +1,16 @@
-import products
+from products import Product
 
-"""
+# Test Products class
 
-Test products.py
+bose = Product(name="Bose QuietComfort Earbuds", price=250, quantity= 500)
+mac = Product("MacBook Air M2", 1450, 100)
+print(bose.show())
+print(mac.show())
 
-bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-mac = Product("MacBook Air M2", price=1450, quantity=100)
-
-print(bose.buy(50))
-print(mac.buy(100))
+bose.buy(2)
+mac.buy(100)
 print(mac.is_active())
+print(mac.show())
 
-bose.show()
-mac.show()
-
-bose.set_quantity(1000)
-bose.show()
-"""
+# bose.set_quantity(1000)
+# bose.show()
