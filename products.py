@@ -108,25 +108,23 @@ class Product:
           to False.
           Returns the total price (float) of the purchase.
           """
-          if not isinstance(quantity, (int, float)):
-               raise TypeError("Quantity must be a number")
-          if quantity < 0:
-               raise ValueError("Please introduce at least one unit to buy")
+          try:
+               total_price = quantity * self.price
 
-          total_price = quantity * self.price
+               if not isinstance(quantity, (int, float)):
+                    raise TypeError("Quantity must be a number")
+               if quantity < 0:
+                    raise ValueError("Please introduce at least one unit to buy")
 
-          try: ## temporary prints ####################
                if self.quantity >= quantity:
-                    print(f"** The total price is {total_price}€ for {quantity} units.")
                     self.quantity -= quantity
                else:
-                    print("Not enough product in store.")
+                    print(f"Not enough {self.name} units in store.")
           except Exception as e:
                print("Error: ", e)
-          finally:
-               print("Updating available product units:")
-               print(self.show())
-               if self.quantity < 1:
-                    self.active = False
-                    print(f"{self.name} is no longer available.")
+
+          if self.quantity < 1:
+               self.active = False
+               return 0
+          else:
                return total_price
