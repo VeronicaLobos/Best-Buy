@@ -15,10 +15,14 @@ def start():
     """
     Prints a menu for the user/buyer.
     """
-    print("   Store Menu\n----------")
+    print("\tStore Menu\n\t----------")
     print("1. List all products in store")
     print("2. Show total amount in store")
     print("3. Make an order")
     print("4. Quit")
 
+def main():
+    start()
 
+if __name__ == "__main__":
+    main()
