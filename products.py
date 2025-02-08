@@ -52,7 +52,7 @@ class Product:
           """
           try:
                self.quantity: int = quantity
-               if self.is_active():
+               if self.quantity > 0:
                     self.activate()
                else:
                     self.deactivate()
@@ -62,10 +62,11 @@ class Product:
                if quantity < 0:
                     raise ValueError("Quantity must be 0 or higher")
           finally:
-               if self.is_active == True:
+               if self.active == True:
                     print(f"Product currently available, {self.quantity} units left.")
                else:
                     print("Product currently unavailable.")
+                    print(self.quantity)
 
 
      def is_active(self) -> bool:
@@ -101,9 +102,11 @@ class Product:
      def buy(self, quantity) -> float:
           """
           Buys a given quantity of the product.
-          Returns the total price (float) of the purchase.
+          Raises an Exception for incorrect inputs.
           Updates the quantity of the product.
-          In case of a problem (when? think about it), raises an Exception.
+          If the quantity reaches 0, updates active attribute
+          to False.
+          Returns the total price (float) of the purchase.
           """
           if not isinstance(quantity, (int, float)):
                raise TypeError("Quantity must be a number")
@@ -112,9 +115,9 @@ class Product:
 
           total_price = quantity * self.price
 
-          try:
+          try: ## temporary prints ####################
                if self.quantity >= quantity:
-                    print(f"** The total is {total_price}€ for {quantity} units.")
+                    print(f"** The total price is {total_price}€ for {quantity} units.")
                     self.quantity -= quantity
                else:
                     print("Not enough product in store.")
@@ -122,5 +125,8 @@ class Product:
                print("Error: ", e)
           finally:
                print("Updating available product units:")
-               #### complete here
                print(self.show())
+               if self.quantity < 1:
+                    self.active = False
+                    print(f"{self.name} is no longer available.")
+               return total_price
