@@ -1,14 +1,24 @@
 from products import Product
 from store import Store
 
-# Test Products class
 
-bose = Product(name="Bose QuietComfort Earbuds", price=250, quantity= 500)
-mac = Product("MacBook Air M2", 1450, 100)
+# setup initial stock of inventory
+product_list = [ Product(name="MacBook Air M2", price=1450, quantity=100),
+                 Product(name="Bose QuietComfort Earbuds", price=250, quantity=500),
+                 Product(name="Google Pixel 7", price=500, quantity=250)
+               ]
+best_buy = Store(product_list)
 
 
-my_store = Store([bose, mac])
-price = my_store.order([(bose, 5), (mac, 30), (bose, 10)])
-print(f"Order cost: {price} dollars.")
+# user interface will go here
+def start():
+    """
+    Prints a menu for the user/buyer.
+    """
+    print("   Store Menu\n----------")
+    print("1. List all products in store")
+    print("2. Show total amount in store")
+    print("3. Make an order")
+    print("4. Quit")
 
 
