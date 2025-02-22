@@ -1,6 +1,7 @@
 import sys
 from products import Product
 from store import Store
+import commands
 
 
 # setup initial stock of inventory ---------------------------
@@ -18,54 +19,11 @@ def setup_inventory():
                ]
     return Store(product_list)
 
-# commands available through the user interface go here ------
-
-def __print_total_products(my_store):
-    """
-    Command from the command dispatcher function:
-    2. Show total amount in store
-
-    Gets and iterates though every product object stored
-    in the store object received as an argument, retrieves
-    their quantity attribute and sums them.
-    Prints the total amount formated as a string.
-    """
-    total_amount = 0
-    for product in my_store.get_all_products():
-        total_amount += product.get_quantity()
-
-    print(f"Total of {total_amount} items in store")
-
-
-def __print_all_products_store(my_store):
-    """
-    Command from the command dispatcher function:
-    1. List all products in store
-
-    Arg: my_store is a store object which contains a list of
-        product objects. It has a method to return said
-        product objects, and the product objects have a method
-        that serializes their attributes into a string.
-
-    Retrieves all product objects from the given store,
-    formats each product's information into a string.
-    Prints these strings in an ordered list.
-    """
-    products = my_store.get_all_products()
-
-    ordered_list = 1
-    print("------")
-    for product in products:
-        print(f"{ordered_list}. {product.show()}")
-        ordered_list += 1
-    print("------")
-
 
 # commands for the user interface go here --------------------
 def _command_dispatcher(user_input, my_store):
     """
     Utility command for the start function.
-
 
     Args: user_input, the key to access a value in the dict.
         my_store, given as a parameter for a function call.
@@ -74,25 +32,25 @@ def _command_dispatcher(user_input, my_store):
     Returns a function call with a store object as
     parameter.
     """
-    commands = {
-        1: __print_all_products_store, # tested
-        2: __print_total_products,
-        3: "hi",
+    commands_dict = {
+        1: commands.print_all_products_store, # tested
+        2: commands.print_total_products,
+        3: commands.make_order,
         4: sys.exit
         }
-    return commands[user_input](my_store)
+    return commands_dict[user_input](my_store)
 
 
 def _check_input():
     """
     Utility command for the start function.
 
-
     Asks user for input, a number between 1 and 4
     Else, will continue asking for a valid input.
     Handles errors if wrong value input or number
     out of range.
-    Returns an integer.
+    Returns an integer, or raises an error and
+    interrupts the current loop that made the call.
     """
     while True:
         try:
