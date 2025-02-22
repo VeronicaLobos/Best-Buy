@@ -1,7 +1,20 @@
 ### My first OOP practice with Python
 
 This is the first part of a project to learn how to create classes, and to help me understand basic OOP with Python.
-WIP !!
+
+#### Instalation
+
+Clone this repository and run main *duh*
+
+#### What does this button do?
+
+Best Buy (this program) is a CLI that simulates a self-checkout TPV.
+A store object is generated along with product objects when the program runs (hard coded).
+The user interface prints a menu of actions available in a command dispatcher.
+Users can check inventory from a store class object, which contains product class objects.
+Users can check the total amount of units across all products in the store.
+Users can order: grand total is shown and product quantity is updated.
+
 
 ##### Making nice code:
 
