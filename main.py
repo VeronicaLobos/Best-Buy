@@ -32,11 +32,13 @@ def _command_dispatcher(user_input, my_store):
     Returns a function call with a store object as
     parameter.
     """
+    if user_input == 4:
+        sys.exit()
+
     commands_dict = {
         1: commands.print_all_products_store, # tested
         2: commands.print_total_products,
         3: commands.make_order,
-        4: sys.exit
         }
     return commands_dict[user_input](my_store)
 
