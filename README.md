@@ -18,9 +18,11 @@ Users can order: grand total is shown and product quantity is updated.
 
 ##### Making nice code:
 
-+ Type Hinting: Improved code readability, it will facilitate static analysis.
++ Type Hinting: Improved code readability, it will facilitate static analysis of each class module.
 + Docstrings: Explaining the purpose of each class, and the behaviour of each method, will improve maintainability.
++ More Docstrings: Explaining what each function does and returns, or at least trying to get used to it.
 + Error Handling: Type checking, empty strings and negative values will cause errors when running the program.
-+ Exception messages: Each error will raise different error messages, making debugging easier and to guide the user during interaction.
++ Assertions: Since this is a project for learning and not for production, some assertions can be found for checking input.
++ Exception messages: Each error and assertion will raise different error messages, making debugging easier and to guide the user during interaction.
 
 * Product class dynamic attribute: The instantiation will contain an "active" (bool) attribute, which will be initialized as True if the "quantity" (int) attribute is higher than zero, otherwise its value will be set to False.
