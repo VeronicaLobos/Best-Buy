@@ -127,9 +127,14 @@ def make_order(my_store):
         if _check_product_num(product_num, product_list):
             product = _check_amount(product_num, amount,
                                     product_list)
-            cart.append((product, amount))
-            print("Product added to list!\n")
-            cart_empty = False
+            ### bug fix: order too large returns None,
+            ### check to avoid program from crashing
+            if product == None:
+                return
+            else:
+                cart.append((product, amount))
+                print("Product added to list!\n")
+                cart_empty = False
 
     grand_total = my_store.order(cart)
     print(f"Order made! Total payment: ${grand_total}")
