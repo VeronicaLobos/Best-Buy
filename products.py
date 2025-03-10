@@ -6,7 +6,7 @@ class Product:
           If something is invalid (empty name / negative price or
           quantity), raises an exception.
           The 'active' attribute is boolean and reflects product
-          availability. It is dinamically set during object
+          availability. It is dynamically set during object
           instantiation.
           """
 
@@ -104,27 +104,24 @@ class Product:
           Buys a given quantity of the product.
           Raises an Exception for incorrect inputs.
           Updates the quantity of the product.
-          If the quantity reaches 0, updates active attribute
-          to False.
           Returns the total price (float) of the purchase.
           """
           try:
-               total_price = quantity * self.price
-
                if not isinstance(quantity, (int, float)):
                     raise TypeError("Quantity must be a number")
                if quantity < 0:
                     raise ValueError("Please introduce at least one unit to buy")
 
                if self.quantity >= quantity:
+                    ### bug fix: obtain total price before updating
+                    ### product quantity
+                    total_price = quantity * self.price
                     self.quantity -= quantity
                else:
                     print(f"Not enough {self.name} units in store.")
+
           except Exception as e:
                print("Error: ", e)
-
-          if self.quantity < 1:
-               self.active = False
                return 0
-          else:
-               return total_price
+
+          return total_price

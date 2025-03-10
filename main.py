@@ -51,19 +51,19 @@ def _check_input():
     Else, will continue asking for a valid input.
     Handles errors if wrong value input or number
     out of range.
-    Returns an integer, or raises an error and
-    interrupts the current loop that made the call.
+    Returns an integer between 1-4 (included)
     """
     while True:
         try:
-            user_input = int(input("Please choose a number: "))
+            user_input = int(input("Please choose a number (1-4): "))
             assert 1 <= user_input <= 4
             return user_input
         except AssertionError:
-            return
+            print("Number not valid")
+            continue
         except ValueError:
             print("Error with your choice! Try again!")
-            return
+            continue
 
 
 def _print_menu():

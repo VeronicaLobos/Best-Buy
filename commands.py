@@ -20,13 +20,16 @@ def print_all_products_store(my_store):
     Prints these strings in an ordered list.
     """
     products = my_store.get_all_products()
-
-    ordered_list = 1
-    print("------")
-    for product in products:
-        print(f"{ordered_list}. {product.show()}")
-        ordered_list += 1
-    print("------")
+    print(products)
+    if len(products) == 0:
+        print("No products available at the moment")
+    else:
+        ordered_list = 1
+        print("------")
+        for product in products:
+            print(f"{ordered_list}. {product.show()}")
+            ordered_list += 1
+        print("------")
 
 
 def print_total_products(my_store):
@@ -95,7 +98,8 @@ def make_order(my_store):
     Prompts the user for input and handles errors,
     empty input with an empty cart exits the command.
     Adds a tuple containing a product object and a
-    quantity (int) to the cart (list).
+    quantity (int) to the cart (list). If the amount for
+    the purchase is too large, returns to the menu.
     Sets cart_empty to False, keeps prompting the user
     for input until empty input.
     Calls a store method to receive total price, prints
@@ -138,3 +142,13 @@ def make_order(my_store):
 
     grand_total = my_store.order(cart)
     print(f"Order made! Total payment: ${grand_total}")
+
+    """
+    ##  When the quantity of a product reaches 0 after a purchase,
+    ##  the product is removed from the store
+    ##  causes program to crash when calling command 1 after purchase
+    ##  Will update in next project phase
+    for item in cart:
+        if item[0].quantity < 1:
+            my_store.remove_product(item[0])
+    """
