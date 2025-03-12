@@ -43,7 +43,7 @@ class Product:
           return self.quantity
 
 
-     def set_quantity(self, quantity) -> int:
+     def set_quantity(self, quantity):
           """
           Setter function for quantity.
           If quantity reaches 0, deactivates the product.
@@ -62,7 +62,7 @@ class Product:
                if quantity < 0:
                     raise ValueError("Quantity must be 0 or higher")
           finally:
-               if self.active == True:
+               if self.active:
                     print(f"Product currently available, {self.quantity} units left.")
                else:
                     print("Product currently unavailable.")

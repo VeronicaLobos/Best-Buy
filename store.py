@@ -37,16 +37,17 @@ class Store:
     def get_all_products(self):
         """
         Returns all products in the store that are active.
+        If there aren't any products, returns an empty list.
         """
-        active_products = list()
+        active_products = []
         for product in Store.stored:
             if product.is_active():
                 active_products.append(product)
 
-        if len(active_products) > 1:
+        if len(active_products) >= 1:
             return active_products
         else:
-            return "Currently there aren't available products."
+            return []
 
 
     def order(self, shopping_list) -> float:

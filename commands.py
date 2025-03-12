@@ -20,7 +20,7 @@ def print_all_products_store(my_store):
     Prints these strings in an ordered list.
     """
     products = my_store.get_all_products()
-    print(products)
+
     if len(products) == 0:
         print("No products available at the moment")
     else:
@@ -37,11 +37,16 @@ def print_total_products(my_store):
     Command from the command dispatcher function:
     2. Show total amount in store
 
+    Checks if there are products in the store.
     Gets and iterates though every product object stored
     in the store object received as an argument, retrieves
     their quantity attribute and sums them.
     Prints the total amount formated as a string.
     """
+    if len(my_store.get_all_products()) == 0:
+        print("Currently there aren't products available.")
+        return
+
     total_amount = 0
     for product in my_store.get_all_products():
         total_amount += product.get_quantity()
@@ -91,6 +96,8 @@ def make_order(my_store):
     Command from the command dispatcher function:
     2. Show total amount in store
 
+    Checks if there are products available in the store.
+
     Prints total price and updates product objects
     quantity attribute from store object.
 
@@ -104,8 +111,14 @@ def make_order(my_store):
     for input until empty input.
     Calls a store method to receive total price, prints
     it formated as a string.
+
+    If product quantity reaches 0, removes it from the store.
     """
-    print_all_products_store(my_store)
+    if len(my_store.get_all_products()) == 0:
+        print("No products available!")
+        return
+
+    print_all_products_store(my_store) ########
     print("When you want to finish order, enter empty text.")
 
     product_list = my_store.get_all_products()
@@ -125,7 +138,7 @@ def make_order(my_store):
             product_num = int(product_num_str)
             amount = int(amount_str)
         except ValueError:
-            print("Error while making order!")
+            print("Error while making order")
             return
 
         if _check_product_num(product_num, product_list):
@@ -133,7 +146,7 @@ def make_order(my_store):
                                     product_list)
             ### bug fix: order too large returns None,
             ### check to avoid program from crashing
-            if product == None:
+            if product is None:
                 return
             else:
                 cart.append((product, amount))
@@ -143,12 +156,8 @@ def make_order(my_store):
     grand_total = my_store.order(cart)
     print(f"Order made! Total payment: ${grand_total}")
 
-    """
-    ##  When the quantity of a product reaches 0 after a purchase,
-    ##  the product is removed from the store
-    ##  causes program to crash when calling command 1 after purchase
-    ##  Will update in next project phase
+    ## update store
     for item in cart:
         if item[0].quantity < 1:
             my_store.remove_product(item[0])
-    """
+            print(f"{item[0].name} removed from store due to unavailability")
