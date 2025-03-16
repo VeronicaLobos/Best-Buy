@@ -51,7 +51,7 @@ class Product:
           of the product.
           """
           try:
-               self.quantity: int = quantity
+               self.quantity -= quantity
                if self.quantity > 0:
                     self.activate()
                else:
@@ -116,7 +116,7 @@ class Product:
                     ### bug fix: obtain total price before updating
                     ### product quantity
                     total_price = quantity * self.price
-                    self.quantity -= quantity
+                    self.set_quantity(quantity)
                else:
                     print(f"Not enough {self.name} units in store.")
 
